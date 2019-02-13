@@ -9,23 +9,23 @@ namespace Task3
 {
     class Program
     {
-        static void Main(string[] args)
+         public static void Main(string[] args)
         {
-            DirectoryInfo dir = new DirectoryInfo(@"C:\Users\NUR\source\repos\Task3");                                           //directory
-            PrintInfo(dir, 0);                                                                                                  //get all files and directories
+            DirectoryInfo fs = new DirectoryInfo(@"C:\Users\NUR\source\repos\week2\Task3");                                           //directory
+            PrintInfo(fs, 0);                                                                                                  //get all files and directories
         }
 
-        static void PrintInfo(FileSystemInfo fs, int k)
+        private static void PrintInfo(FileSystemInfo fs, int k)
         {
             string s = new string(' ', k);                                                                                      //k space 
             Console.WriteLine(s + fs.Name);
 
             if (fs.GetType() == typeof(DirectoryInfo))
             {
-                FileSystemInfo[] fss = ((DirectoryInfo)fs).GetFileSystemInfos();
-                for (int i = 0; i < fss.Length; ++i)
+                var y = fs as DirectoryInfo;
+                foreach (var x in y.EnumerateFileSystemInfos())
                 {
-                    PrintInfo(fss[i], k + 3);                                                                                  //recursion
+                    PrintInfo(x , k + 3);                                                                                  //recursion
                 }
             }
         }
